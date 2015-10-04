@@ -1,0 +1,20 @@
+{
+  "name": "stepanp",
+  "description": "stepanp.com",
+  "main": "deploy/index.js",
+  "author": "Stepan Parunashvili",
+  "scripts": {
+    "start": "node deploy/index.js"
+  },
+  "dependencies": {
+    "logfmt": "^1.2.0",
+    "express": "^4.13.3",
+    "http-proxy": "^1.11.2",
+    "cookie-parser": "^1.4.0",
+    "react": "^0.13.3",
+    "xmlhttprequest": "*"
+  },
+  "engines": {
+    "node": "0.12.x"
+  }
+}
