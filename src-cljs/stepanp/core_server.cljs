@@ -1,32 +1,37 @@
 (ns stepanp.core-server
-  (:require [stepanp.settings :as settings]
-            [reagent.core :as r]
-            [stepanp.routes :refer [routes]]))
+  (:require
+    [cljs.nodejs :as nodejs]
+    [reagent.core :as r]
+    [stepanp.settings :as settings]
+    [stepanp.routes :refer [routes]]))
 
-;; Pages
+(nodejs/enable-util-print!)
 
-(defn init! []
-  (def __dirname (js* "__dirname"))
-  (def express (cljs.nodejs/require "express"))
-  (def logfmt (cljs.nodejs/require "logfmt"))
-  (def port (or (aget cljs.nodejs/process "env" "PORT") settings/default-port))
+(defonce __dirname (js* "__dirname"))
+(defonce express (cljs.nodejs/require "express"))
+(defonce logfmt (cljs.nodejs/require "logfmt"))
+(defonce port (or (aget cljs.nodejs/process "env" "PORT") settings/default-port))
+(defonce http (nodejs/require "http"))
 
-  (def app (express))
-  (.use app (.requestLogger logfmt))
-  (.use app "/static" (.static express (str __dirname "/../resources")))
 
-  (.get app "/:params?*"
-    (fn [req res]
-      (js/ReactRouter.match
-        #js {:routes routes :location (js/createLocation (.-url req))}
-        (fn [_ _ props]
-          (let [str (js/React.renderToString
-                      ((js/React.createFactory js/ReactRouter.RoutingContext)
-                        props))]
-            (.send res (+ "<div id=\"react-view\">" str "</div>"))))))))
+(defn get-frontend [req res]
+  (js/ReactRouter.match
+    #js {:routes routes
+         :location (js/createLocation (.-url req))}
+    (fn [_ _ props]
+      (let [str (js/React.renderToString
+                  ((js/React.createFactory js/ReactRouter.RoutingContext)
+                    props))]
+        (.send res (+ "<div id=\"react-view\">" str "</div>"))))))
 
-(defn -main [& args]
-  (init!)
-  (.listen app port))
+(def app (express))
+
+(. app (use (.requestLogger logfmt)))
+(. app (use "/static" (. express (static (str __dirname "/../resources")))))
+(. app (get "/:params?*" get-frontend))
+
+(defn -main []
+  (doto (.createServer http #(app %1 %2))
+    (.listen port)))
 
 (set! *main-cli-fn* -main)
