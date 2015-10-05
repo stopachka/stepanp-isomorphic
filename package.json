@@ -9,10 +9,9 @@
   "dependencies": {
     "logfmt": "^1.2.0",
     "express": "^4.13.3",
-    "http-proxy": "^1.11.2",
-    "cookie-parser": "^1.4.0",
     "react": "^0.13.3",
-    "xmlhttprequest": "*"
+    "react-router": "1.0.0-rc1",
+    "history": "^1.9.1"
   },
   "engines": {
     "node": "0.12.x"

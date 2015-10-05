@@ -16,3 +16,4 @@
 pom.xml
 supper.compiled.test.js
 *iml
+*-init.clj
