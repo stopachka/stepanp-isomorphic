@@ -1,9 +1,10 @@
 (ns stepanp.core-server
   (:require
     [cljs.nodejs :as nodejs]
-    [reagent.core :as r]
+    ;[reagent.core :as r]
     [stepanp.settings :as settings]
-    [stepanp.routes :refer [routes]]))
+    [stepanp.routes :refer [routes]]
+    ))
 
 (nodejs/enable-util-print!)
 
@@ -13,16 +14,18 @@
 (defonce port (or (aget cljs.nodejs/process "env" "PORT") settings/default-port))
 (defonce http (nodejs/require "http"))
 
+(.log js/console js/ReactRouter.match)
 
 (defn get-frontend [req res]
   (js/ReactRouter.match
     #js {:routes routes
-         :location (js/createLocation (.-url req))}
+         :location (.-url req)}
     (fn [_ _ props]
       (let [str (js/React.renderToString
                   ((js/React.createFactory js/ReactRouter.RoutingContext)
                     props))]
         (.send res (+ "<div id=\"react-view\">" str "</div>"))))))
+
 
 (def app (express))
 

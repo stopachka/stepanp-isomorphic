@@ -4,14 +4,19 @@
   "main": "deploy/index.js",
   "author": "Stepan Parunashvili",
   "scripts": {
-    "start": "node deploy/index.js"
+    "buildjs": "NODE_ENV=production webpack --progress --color -p --config webpack.config.js",
+    "main": "node deploy/index.js"
   },
   "dependencies": {
     "logfmt": "^1.2.0",
     "express": "^4.13.3",
     "react": "^0.13.3",
-    "react-router": "1.0.0-rc1",
-    "history": "^1.9.1"
+    "react-router": "1.0.0-rc3",
+    "history": "^1.12.4"
+  },
+  "devDependencies": {
+    "babel-loader": "^5.3.2",
+    "webpack": "^1.12.1"
   },
   "engines": {
     "node": "0.12.x"

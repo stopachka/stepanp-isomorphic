@@ -4,7 +4,6 @@
   :clean-targets ^{:protect false}
   ["out-client"
    "out-server"
-   "out-test"
    "deploy/index.js"
    "resources/js/stepanp.compiled.js"
    "stepanp.compiled.test.js"
@@ -24,7 +23,7 @@
                           :target :nodejs
                           :output-to "deploy/index.js"
                           :output-dir "out-server"
-                          :preamble ["include.js"]
+                          :preamble ["js/js-bundle.js"]
                           :optimizations :simple
                           :language-in :ecmascript5
                           :language-out :ecmascript5}}
@@ -32,6 +31,7 @@
                          :source-paths ["src-cljs"]
                          :compiler
                          {:main "stepanp.core-client"
+                          :preamble ["resources/js/js-bundle.js"]
                           :output-to "resources/js/stepanp.compiled.js"
                           :output-dir "out-client"
                           :optimizations :advanced
