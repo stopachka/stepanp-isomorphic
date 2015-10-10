@@ -13,6 +13,7 @@
 /out-test/
 /out/
 /target/
+/deploy/index.js
 pom.xml
 supper.compiled.test.js
 *iml
