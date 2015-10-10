@@ -1,10 +1,10 @@
 (ns stepanp.core-server
+  (:require-macros [hiccups.core :as hiccups])
   (:require
     [cljs.nodejs :as nodejs]
-    ;[reagent.core :as r]
+    [hiccups.runtime :as hiccupsrt]
     [stepanp.settings :as settings]
-    [stepanp.routes :refer [routes]]
-    ))
+    [stepanp.routes :refer [routes]]))
 
 (nodejs/enable-util-print!)
 
@@ -14,23 +14,33 @@
 (defonce port (or (aget cljs.nodejs/process "env" "PORT") settings/default-port))
 (defonce http (nodejs/require "http"))
 
-(.log js/console js/ReactRouter.match)
+(hiccups/defhtml main-templ [react-str]
+  [:html
+   [:head
+    [:meta {:charset "utf-8"}]
+    [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge"}]
+    [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+    [:title "Stepan Parunashvili"]
+   [:body
+    [:div#root react-str]
+    [:script {:type "text/javascript" :src "/static/js/stepanp.compiled.js"}]
+    [:script {:type "text/javascript"} "stepanp[\"core_client\"].init()"]]]])
 
 (defn get-frontend [req res]
   (js/ReactRouter.match
     #js {:routes routes
          :location (.-url req)}
     (fn [_ _ props]
-      (let [str (js/React.renderToString
-                  ((js/React.createFactory js/ReactRouter.RoutingContext)
-                    props))]
-        (.send res (+ "<div id=\"react-view\">" str "</div>"))))))
+      (let [react-str (js/React.renderToString
+                        ((js/React.createFactory js/ReactRouter.RoutingContext)
+                          props))]
+        (. res (send (main-templ react-str)))))))
 
 
 (def app (express))
 
 (. app (use (.requestLogger logfmt)))
-(. app (use "/static" (. express (static (str __dirname "/../resources")))))
+(. app (use "/static" (.static express (str __dirname "/../resources"))))
 (. app (get "/:params?*" get-frontend))
 
 (defn -main []

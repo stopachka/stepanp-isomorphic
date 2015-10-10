@@ -10,7 +10,8 @@
    "target"]
   :profiles {:default [:cljs-shared]
              :cljs-shared
-             {:dependencies [[org.clojure/clojure "1.7.0"]
+             {:dependencies [[hiccups "0.3.0"]
+                             [org.clojure/clojure "1.7.0"]
                              [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                              [org.clojure/clojurescript "1.7.48"]
                              [reagent "0.5.1" :exclusions [cljsjs/react]]]
@@ -31,8 +32,8 @@
                          :source-paths ["src-cljs"]
                          :compiler
                          {:main "stepanp.core-client"
-                          :preamble ["resources/js/js-bundle.js"]
+                          :preamble ["js/js-bundle.js"]
                           :output-to "resources/js/stepanp.compiled.js"
                           :output-dir "out-client"
-                          :optimizations :advanced
+                          :optimizations :simple
                           :pretty-print false}}]}}})

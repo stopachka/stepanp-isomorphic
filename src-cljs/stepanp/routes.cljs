@@ -14,4 +14,3 @@
   (Route {:name "main" :component c/main-handler}
     (Route {:name "posts" :path "/" :component c/posts-handler})
     (Route {:name "about" :path "about" :component c/about-handler})))
-
