@@ -18,8 +18,7 @@
               :plugins [[lein-cljsbuild "1.1.0"]]
               :cljsbuild
               {:builds [{:id "server"
-                         :source-paths
-                         ["src-cljs/cljsjs" "src-cljs/stepanp/shared" "src-cljs/stepanp/server"]
+                         :source-paths ["src-cljs/stepanp/shared" "src-cljs/stepanp/server"]
                          :compiler
                          {:main "stepanp.server.core"
                           :target :nodejs
@@ -30,8 +29,7 @@
                           :language-in :ecmascript5
                           :language-out :ecmascript5}}
                         {:id "client"
-                         :source-paths
-                         ["src-cljs/cljsjs" "src-cljs/stepanp/shared" "src-cljs/stepanp/client"]
+                         :source-paths ["src-cljs/stepanp/shared" "src-cljs/stepanp/client"]
                          :compiler
                          {:main "stepanp.client.core"
                           :preamble ["js/js-bundle.js"]

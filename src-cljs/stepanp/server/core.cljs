@@ -2,9 +2,9 @@
   (:require-macros [hiccups.core :as hiccups])
   (:require
     [cljs.nodejs :as nodejs]
-    [hiccups.runtime :as hiccupsrt]
-    [stepanp.shared.settings :as settings]
-    [stepanp.shared.routes :refer [routes]]))
+    [hiccups.runtime]
+    [stepanp.settings :as settings]
+    [stepanp.routes :refer [routes]]))
 
 (nodejs/enable-util-print!)
 
@@ -24,7 +24,7 @@
    [:body
     [:div#root react-str]
     [:script {:type "text/javascript" :src "/static/js/stepanp.compiled.js"}]
-    [:script {:type "text/javascript"} "stepanp[\"core_client\"].init()"]]]])
+    [:script {:type "text/javascript"} "stepanp.client.core.init()"]]]])
 
 (defn get-frontend [req res]
   (js/ReactRouter.match
