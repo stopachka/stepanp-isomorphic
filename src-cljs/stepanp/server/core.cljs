@@ -22,9 +22,9 @@
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
     [:title "Stepan Parunashvili"]
    [:body
-    [:div#root react-str]
+    [:div {:id settings/root-id} react-str]
     [:script {:type "text/javascript" :src "/static/js/stepanp.compiled.js"}]
-    [:script {:type "text/javascript"} "stepanp.client.core.init()"]]]])
+    [:script {:type "text/javascript"} "stepanp.client.core.init_BANG_()"]]]])
 
 (defn get-frontend [req res]
   (js/ReactRouter.match
