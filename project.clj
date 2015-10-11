@@ -5,8 +5,11 @@
                  [org.clojure/clojurescript "1.7.48"]
                  [reagent "0.5.1" :exclusions [cljsjs/react]]]
   :plugins [[lein-cljsbuild "1.1.0"]]
+
+  :target-path "target/%s/"
+  :compile-path "%s/classy-files"
   :clean-targets ^{:protect false}
-  ["out-client" "out-server" "deploy/index.js" "resources/js/stepanp.compiled.js"]
+  ["target" "out-client" "out-server" "deploy/index.js" "resources/js/stepanp.compiled.js"]
   :cljsbuild
   {:builds
    [{:id "server"
