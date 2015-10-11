@@ -1,7 +1,8 @@
 (ns stepanp.routes
   (:require
+    [reagent.core :as r]
     [stepanp.components :as c]
-    [reagent.core :as r]))
+    [stepanp.js-bundle]))
 
 (defn Route
   [{:keys [component] :as props} & children]

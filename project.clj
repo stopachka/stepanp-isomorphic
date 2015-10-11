@@ -19,7 +19,8 @@
       :target :nodejs
       :output-to "deploy/index.js"
       :output-dir "out-server"
-      :preamble ["js/js-bundle.js"]
+      :foreign-libs [{:file "resources/js/js-bundle.js"
+                      :provides ["stepanp.js-bundle"]}]
       :optimizations :simple
       :language-in :ecmascript5
       :language-out :ecmascript5}}
@@ -27,8 +28,9 @@
      :source-paths ["src-cljs/stepanp/shared" "src-cljs/stepanp/client"]
      :compiler
      {:main "stepanp.client.core"
-      :preamble ["js/js-bundle.js"]
       :output-to "resources/js/stepanp.compiled.js"
       :output-dir "out-client"
+      :foreign-libs [{:file "resources/js/js-bundle.js"
+                      :provides ["stepanp.js-bundle"]}]
       :optimizations :simple
       :pretty-print false}}]})

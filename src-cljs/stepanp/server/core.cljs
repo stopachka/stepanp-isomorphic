@@ -3,6 +3,7 @@
   (:require
     [cljs.nodejs :as nodejs]
     [hiccups.runtime]
+    [stepanp.js-bundle]
     [stepanp.settings :as settings]
     [stepanp.routes :refer [routes]]))
 

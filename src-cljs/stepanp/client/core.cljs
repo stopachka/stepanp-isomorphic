@@ -1,5 +1,6 @@
 (ns stepanp.client.core
   (:require
+    [stepanp.js-bundle]
     [stepanp.routes :refer [routes]]
     [stepanp.settings :as settings]))
 
