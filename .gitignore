@@ -14,6 +14,8 @@
 /out/
 /target/
 /deploy/index.js
+/resources/js/js-bundle.js
+/resources/js/stepanp.compiled.js
 pom.xml
 supper.compiled.test.js
 *iml
