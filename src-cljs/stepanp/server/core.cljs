@@ -1,10 +1,10 @@
-(ns stepanp.core-server
+(ns stepanp.server.core
   (:require-macros [hiccups.core :as hiccups])
   (:require
     [cljs.nodejs :as nodejs]
     [hiccups.runtime :as hiccupsrt]
-    [stepanp.settings :as settings]
-    [stepanp.routes :refer [routes]]))
+    [stepanp.shared.settings :as settings]
+    [stepanp.shared.routes :refer [routes]]))
 
 (nodejs/enable-util-print!)
 

@@ -1,6 +1,6 @@
-(ns stepanp.routes
+(ns stepanp.shared.routes
   (:require
-    [stepanp.components :as c]
+    [stepanp.shared.components :as c]
     [reagent.core :as r]))
 
 (defn Route

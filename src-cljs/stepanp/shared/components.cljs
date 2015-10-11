@@ -1,4 +1,4 @@
-(ns stepanp.components)
+(ns stepanp.shared.components)
 
 (defn main-handler [props]
   (:children props))
